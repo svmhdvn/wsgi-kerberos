@@ -1,13 +1,15 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+
 import logging
-from wsgi_kerberos import KerberosAuthMiddleware
 from wsgiref.simple_server import make_server
+
+from wsgi_kerberos import KerberosAuthMiddleware
 
 
 def example(environ, start_response):
     user = environ.get('REMOTE_USER', 'ANONYMOUS')
     start_response('200 OK', [('Content-Type', 'text/plain')])
-    data = "Hello {}".format(user)
+    data = f"Hello {user}"
     return [data.encode()]
 
 
